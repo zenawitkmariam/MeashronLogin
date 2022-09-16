@@ -141,34 +141,34 @@
                     if(returnValue && returnValue.ret != null){
                       var result = JSON.parse(returnValue.ret);
                       if(result.EntityId){
-                        var toastElement = document.getElementById("successToast");
-                        var toastElm = new bootstrap.Toast(toastElement);
-                        toastElm.show();
-                        var toastElementData = document.getElementById("successToastData");
-                        var toastElmData = new bootstrap.Toast(toastElementData);
-                        toastElmData.show();
+                        // var toastElement = document.getElementById("successToast");
+                        // var toastElm = new bootstrap.Toast(toastElement);
+                        // toastElm.show();
+                        // var toastElementData = document.getElementById("successToastData");
+                        // var toastElmData = new bootstrap.Toast(toastElementData);
+                        // toastElmData.show();
                       }
                       else if(result.ResultCode){
-                        var toastElement = document.getElementById("resultMessageToast");
-                        var toastElm = new bootstrap.Toast(toastElement);
-                        toastElm.show();
+                        // var toastElement = document.getElementById("resultMessageToast");
+                        // var toastElm = new bootstrap.Toast(toastElement);
+                        // toastElm.show();
                       }
                       else {
-                        var toastElement = document.getElementById("errorToast");
-                        var toastElm = new bootstrap.Toast(toastElement);
-                        toastElm.show();
+                        // var toastElement = document.getElementById("errorToast");
+                        // var toastElm = new bootstrap.Toast(toastElement);
+                        // toastElm.show();
                       }
                     }
                     else {
-                        var toastElement = document.getElementById("errorToast");
-                        var toastElm = new bootstrap.Toast(toastElement);
-                        toastElm.show();
+                        // var toastElement = document.getElementById("errorToast");
+                        // var toastElm = new bootstrap.Toast(toastElement);
+                        // toastElm.show();
                     }
                 },
                 error: function(response){
-                        var toastElement = document.getElementById("errorToast");
-                        var toastElm = new bootstrap.Toast(toastElement);
-                        toastElm.show();
+                        // var toastElement = document.getElementById("errorToast");
+                        // var toastElm = new bootstrap.Toast(toastElement);
+                        // toastElm.show();
                 }
               });
               return false;
