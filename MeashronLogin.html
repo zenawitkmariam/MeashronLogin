@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      
+        <!-- Bootstrap  -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+                    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      <title>Bootstrap 5</title>
+      </head>
+    <body>
+      <!-- navbar -->
+        <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+          <div class="container">
+            <a href="#" class="navbar-brand">Welcome to <span class="text-warning" >Makashron</span></a>
+            <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navmenu" aria-controls="sidebarMenu" aria-expanded="true" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+              <ul class="ul navbar-nav ms-auto">
+                <li class="li nav-item">
+                  <a class="nav-link active" href="#">Login</a>
+                </li>
+                <li class="li nav-item">
+                  <a class="nav-link" href="#">About As</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+        <!-- login page -->
+        <div  class="pt-5">
+          <div class="container">
+            <div class="row">
+              <div class="col-9 col-sm-12 col-md-9 col-lg-7 col-xl-5 col-xxl-5 m-auto">
+              <div class="card border-0 shadow">
+                <div class="card-body">
+                  <svg class="mx-auto my-3" xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                  </svg>
+                  <form id="submit-form" action="#" class="ajax" >
+                    <div class="form-control">
+                        <label for="UserName" style="padding-top: 5%;" class="form-label">User Name <span style="color:red">*</span> </label>
+                        <input type="text" name="UserName" class="form-control" id="username" required>
+
+                        <label for="Password"  style="padding-top: 5%;" class="form-label">Password <span style="color:red">*</span> </label>
+                        <input type="password" name="Password"  class="form-control" id="password" required>
+
+                        <div class="container text-center" style="padding-top: 5%;">
+                            <button class="btn btn-primary btn-lg" type="submit" value="submit">Login</button>
+                        </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    
+
+
+      <div class="toast-container"  style=" position: absolute; top: 60px; right: 20px;">
+        <div class="toast align-items-center text-white bg-success border-0" id="successToast" style="  top: 60px; right: 20px;"
+             role="alert" aria-live="assertive" aria-atomic="true"  >
+          <div class="toast-body">
+            successfuly loged In
+          </div>
+        </div>
+      
+        <div class="toast active align-items-center text-white bg-success border-0" id="successToastData" style=" top: 60px; right: 20px;"
+            role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-body">
+            {{ message }}
+          </div>
+        </div>
+      </div>
+      <div class="toast align-items-center text-white bg-danger" style="position: absolute; top: 60px; right: 20px;"
+           id="resultMessageToast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            User Not Found
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="toast align-items-center text-white bg-danger border-0" id="errorToast" style="position: absolute; top: 60px; right: 20px;"
+           role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">
+            Something Went Wrong!
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+      
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+       
+<script type="text/javascript">
+    // $(document).load(function(){
+    //       var toastElement = document.getElementById("errorToast");
+    //       var toastElm = new bootstrap.Toast(toastElement);
+    // })
+    $('form.ajax').on('submit', function(e) {
+           var that =$(this),
+           url = 'http://isapi.mekashron.com/soapclient/soapclient.php?URL=http://isapi.icu-tech.com/icutech-test.dll/wsdl/IICUTech',
+           method = 'POST',
+           data = {};
+           valPass = {};
+           valPass["func"]='Login';
+           text = "";
+           that.find('[name]').each(function(index,value){
+                 var that = $(this),
+                 name = that.attr('name'),
+                 value = that.val();
+                 data[name] = value;
+                 if(text=="")
+                 text += name + "=" + value;
+                 else
+                 text += '&' + name + "=" + value;
+           });
+           text += '&' + "IPs" + "=";
+           valPass["params"]=text;
+
+           $.ajax({
+             url:url,
+             type:method,
+             data:valPass,
+             success:function(response){
+                const returnValue = JSON.parse(response);
+                if(returnValue && returnValue.ret != null){
+                  var result = JSON.parse(returnValue.ret);
+                  if(result.EntityId){
+                    var toastElement = document.getElementById("successToast");
+                    var toastElm = new bootstrap.Toast(toastElement);
+                    toastElm.show();
+                    var toastElementData = document.getElementById("successToastData");
+                    var toastElmData = new bootstrap.Toast(toastElementData);
+                    toastElmData.show('test');
+                  }
+                  else if(result.ResultCode){
+                    var toastElement = document.getElementById("resultMessageToast");
+                    var toastElm = new bootstrap.Toast(toastElement);
+                    toastElm.show();
+                  }
+                  else {
+                    var toastElement = document.getElementById("errorToast");
+                    var toastElm = new bootstrap.Toast(toastElement);
+                    toastElm.show();
+                  }
+                }
+                else {
+                    var toastElement = document.getElementById("errorToast");
+                    var toastElm = new bootstrap.Toast(toastElement);
+                    toastElm.show();
+                }
+             },
+            error: function(response){
+                    var toastElement = document.getElementById("errorToast");
+                    var toastElm = new bootstrap.Toast(toastElement);
+                    toastElm.show();
+            }
+           });
+           return false;
+       });
+
+     
+   </script>   
+    </body>
+    
+</html>
