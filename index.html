@@ -70,18 +70,24 @@
 
       <!-- bootstrap toasts -->
       <div class="toast-container"  style=" position: absolute; top: 60px; right: 20px;">
-        <div class="toast align-items-center text-white bg-success border-0" id="successToast" style="  top: 60px; right: 20px;"
+        <div class="toast align-items-center text-white bg-success border-0" id="successToast" style="  top: 60px; right: 2px;"
              role="alert" aria-live="assertive" aria-atomic="true"  >
-          <div class="toast-body">
-            successfuly loged In
-          </div>
+             <div class="d-flex">
+              <div class="toast-body">
+                Successfully Loged In
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
         </div>
       
         <div class="toast active align-items-center text-white bg-success border-0" id="successToastData" style=" top: 60px; right: 20px;"
             role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-body">
-            {{ message }}
-          </div>
+            <div class="d-flex">
+              <div class="toast-body">
+                Successfully Loged In
+              </div>
+              <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
         </div>
       </div>
       <div class="toast align-items-center text-white bg-danger" style="position: absolute; top: 60px; right: 20px;"
@@ -102,7 +108,17 @@
           <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
       </div>
+
       
+
+        <div class="modal fade" id="quick-view" tabindex="-1">
+          <div class="modal-dialog">
+              <div class="modal-content" id="quick-view-modal">
+
+              </div>
+          </div>
+      </div>
+
     <!-- jquery cdn for backend -->
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -110,7 +126,16 @@
         
     <!-- javascript -->
     <script type="text/javascript">
-      
+          var successToastElement = document.getElementById("successToast");
+          var successToastElm = new bootstrap.Toast(successToastElement,{animation: false});
+          var successToastDataElement = document.getElementById("successToastData");
+          var successToastDataElm = new bootstrap.Toast(successToastDataElement,{animation: false});
+          var resultMessageToastElement = document.getElementById("resultMessageToast");
+          var resultMessageToastElm = new bootstrap.Toast(resultMessageToastElement,{animation: false});
+          var errorToastElement = document.getElementById("errorToast");
+          var errorToastElm = new bootstrap.Toast(errorToastElement,{animation: false});
+          var ttt=["j","h"];
+
         $('form.ajax').on('submit', function(e) {
               var that =$(this),
               url = 'http://isapi.mekashron.com/soapclient/soapclient.php?URL=http://isapi.icu-tech.com/icutech-test.dll/wsdl/IICUTech',
@@ -141,34 +166,23 @@
                     if(returnValue && returnValue.ret != null){
                       var result = JSON.parse(returnValue.ret);
                       if(result.EntityId){
-                        // var toastElement = document.getElementById("successToast");
-                        // var toastElm = new bootstrap.Toast(toastElement);
-                        // toastElm.show();
-                        // var toastElementData = document.getElementById("successToastData");
-                        // var toastElmData = new bootstrap.Toast(toastElementData);
-                        // toastElmData.show();
+                        successToastElm.show();
+                        // successToastDataElm.show();
+                        // $('#quick-view').modal('show');
                       }
                       else if(result.ResultCode){
-                        // var toastElement = document.getElementById("resultMessageToast");
-                        // var toastElm = new bootstrap.Toast(toastElement);
-                        // toastElm.show();
+                        resultMessageToastElm.show();
                       }
                       else {
-                        // var toastElement = document.getElementById("errorToast");
-                        // var toastElm = new bootstrap.Toast(toastElement);
-                        // toastElm.show();
+                        errorToastElm.show();
                       }
                     }
                     else {
-                        // var toastElement = document.getElementById("errorToast");
-                        // var toastElm = new bootstrap.Toast(toastElement);
-                        // toastElm.show();
+                      errorToastElm.show();
                     }
                 },
                 error: function(response){
-                        // var toastElement = document.getElementById("errorToast");
-                        // var toastElm = new bootstrap.Toast(toastElement);
-                        // toastElm.show();
+                  errorToastElm.show();
                 }
               });
               return false;
