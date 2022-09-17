@@ -5,15 +5,16 @@
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+      
         <!-- Bootstrap  -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
                     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-      <title>Bootstrap 5</title>
+      <title>Mekashron</title>
       </head>
     <body>
+      
       <!-- navbar -->
         <nav class="navbar navbar-expand-md bg-primary navbar-dark">
           <div class="container">
@@ -66,8 +67,6 @@
         </div>
       </div>
 
-    
-
       <!-- bootstrap toasts -->
       <div class="toast-container"  style=" position: absolute; top: 60px; right: 20px;">
         <div class="toast align-items-center text-white bg-success border-0" id="successToast" style="  top: 60px; right: 2px;"
@@ -80,11 +79,11 @@
             </div>
         </div>
       
-        <div class="toast active align-items-center text-white bg-success border-0" id="successToastData" style=" top: 60px; right: 20px;"
+        <div class="toast  align-items-center text-white bg-info border-0" id="successToastData" style=" top: 60px; right: 20px;"
             role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
-              <div class="toast-body">
-                Successfully Loged In
+              <div class="toast-body" id="successToastDataBody">
+                
               </div>
               <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -109,23 +108,11 @@
         </div>
       </div>
 
-      <!-- <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navmenu" aria-controls="sidebarMenu" aria-expanded="true" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-
-        <div class="modal fade" id="quick-view" tabindex="-1">
-          <div class="modal-dialog">
-              <div class="modal-content" id="quick-view-modal">
-
-              </div>
-          </div>
-      </div> -->
 
     <!-- jquery cdn for backend -->
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
         
     <!-- javascript -->
     <script type="text/javascript">
@@ -141,7 +128,6 @@
         $('form.ajax').on('submit', function(e) {
               var that =$(this),
               url = 'http://isapi.mekashron.com/soapclient/soapclient.php?URL=http://isapi.icu-tech.com/icutech-test.dll/wsdl/IICUTech',
-              // url = 'http://isapi.mekashron.com/soapclient/soapclient.php?URL=http://isapi.icu-tech.com/icutech-test.dll%2Fwsdl%2FIICUTech';
               method = 'POST',
               data = {};
               valPass = {};
@@ -158,7 +144,7 @@
                     text += '&' + name + "=" + value;
               });
               text += '&' + "IPs" + "=";
-              valPass["params"]=text;
+              valPass["params"] = text;
 
               $.ajax({
                 url:url,
@@ -170,11 +156,13 @@
                       var result = JSON.parse(returnValue.ret);
                       if(result.EntityId){
                         successToastElm.show();
-                        // successToastDataElm.show();
-                        // $('#quick-view').modal('show');
-                        // $("#errorToast").toast({
-                        //   autohide: false
-                        // });
+                        var userInfo = document.getElementById("successToastDataBody");
+                        userInfo.innerHTML = "Name: " + result.FirstName + " " + result.LastName + "<br />" 
+                                             + "Company: " + result.CompanyID + "<br />"
+                                             + "Phone Number: " + result.Mobile + "<br />";
+                                             + "Email: " + result.Email + "<br />";
+                                             + "Country Id: " + result.CountryID + "<br />";
+                        successToastDataElm.show();
                       }
                       else if(result.ResultCode){
                         resultMessageToastElm.show();
