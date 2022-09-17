@@ -181,18 +181,15 @@
                         resultMessageToastElm.show();
                       }
                       else {
-                        // errorToastElm.show();
-                        console.log("tt");
+                        errorToastElm.show();
                       }
                     }
                     else {
                       errorToastElm.show();
-                        console.log("aa");
                     }
                 },
                 error: function(response){
                   errorToastElm.show();
-                        console.log("cc");
                 }
               });
               return false;
