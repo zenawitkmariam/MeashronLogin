@@ -92,8 +92,8 @@
       <div class="toast align-items-center text-white bg-danger" style="position: absolute; top: 60px; right: 20px;"
            id="resultMessageToast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
-          <div class="toast-body">
-            User Not Found
+          <div class="toast-body" id="resultMessageToastBody">
+            
           </div>
           <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
@@ -151,7 +151,6 @@
                 type:method,
                 data:valPass,
                 // headers: {
-                    // 'Content-Type':'application/json'
                     // 'Access-Control-Allow-Origin':'*'
                 // },
                 crossDomain: true,
@@ -170,6 +169,8 @@
                         successToastDataElm.show();
                       }
                       else if(result.ResultCode){
+                        var resultMessage = document.getElementById("resultMessageToastBody");
+                        resultMessage.innerHTML = result.ResultMessage;
                         resultMessageToastElm.show();
                       }
                       else {
