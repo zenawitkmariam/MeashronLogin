@@ -71,11 +71,10 @@
 
       <!-- bootstrap toasts -->
       <div class="toast-container"  style=" position: absolute; top: 60px; right: 2px;">
-        <div class="toast align-items-center text-white bg-success border-0" id="successToast" 
-             role="alert" aria-live="assertive" aria-atomic="true"  >
+        <div class="toast align-items-center text-white  border-0" id="successToast" role="alert" aria-live="assertive" aria-atomic="true"  >
              <div class="d-flex">
-              <div class="toast-body">
-                Successfully Loged In
+              <div class="toast-body"  id="successToastBody">
+               
               </div>
               <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -91,24 +90,6 @@
             </div>
         </div>
       </div>
-      <div class="toast align-items-center text-white bg-danger" style="position: absolute; top: 60px; right: 2px;"
-           id="resultMessageToast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-          <div class="toast-body" id="resultMessageToastBody">
-            
-          </div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      </div>
-      <div class="toast align-items-center text-white bg-danger border-0" id="errorToast" style="position: absolute; top: 60px; right: 2px;"
-           role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-          <div class="toast-body">
-            Something Went Wrong!
-          </div>
-          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-      </div>
 
 
     <!-- jquery cdn for backend -->
@@ -121,10 +102,6 @@
           var successToastElm = new bootstrap.Toast(successToastElement,{animation: false});
           var successToastDataElement = document.getElementById("successToastData");
           var successToastDataElm = new bootstrap.Toast(successToastDataElement,{animation: false});
-          var resultMessageToastElement = document.getElementById("resultMessageToast");
-          var resultMessageToastElm = new bootstrap.Toast(resultMessageToastElement,{animation: false});
-          var errorToastElement = document.getElementById("errorToast");
-          var errorToastElm = new bootstrap.Toast(errorToastElement,{animation: false});
 
         $('form.ajax').on('submit', function(e) {
               var that =$(this),
@@ -160,7 +137,12 @@
                     if(returnValue && returnValue.ret != null){
                       var result = JSON.parse(returnValue.ret);
                       if(result.EntityId){
+
+                        var loginMessage = document.getElementById("successToastBody");
+                        loginMessage.innerHTML = "Successfully Loged In";
+                        $('#successToast').css('background-color','green');
                         successToastElm.show();
+
                         var userInfo = document.getElementById("successToastDataBody");
                         userInfo.innerHTML = "Name: " + result.FirstName + " " + result.LastName + "<br />" 
                                              + "Company: " + result.CompanyID + "<br />"
@@ -170,20 +152,34 @@
                         successToastDataElm.show();
                       }
                       else if(result.ResultCode){
-                        var resultMessage = document.getElementById("resultMessageToastBody");
+                        var resultMessage = document.getElementById("successToastBody");
                         resultMessage.innerHTML = result.ResultMessage;
-                        resultMessageToastElm.show();
+                        $('#successToast').css('background-color','red');
+                        successToastElm.show();
+                        successToastDataElm.hide();
                       }
                       else {
-                        errorToastElm.show();
+                        var errorMessage = document.getElementById("successToastBody");
+                        errorMessage.innerHTML = "Something Went Wrong!";
+                        $('#successToast').css('background-color','red');
+                        successToastElm.show();
+                        successToastDataElm.hide();
                       }
                     }
                     else {
-                      errorToastElm.show();
+                        var errorMessage = document.getElementById("successToastBody");
+                        errorMessage.innerHTML = "Something Went Wrong!";
+                        $('#successToast').css('background-color','red');
+                        successToastElm.show();
+                        successToastDataElm.hide();
                     }
                 },
                 error: function(response){
-                    errorToastElm.show();
+                        var errorMessage = document.getElementById("successToastBody");
+                        errorMessage.innerHTML = "Something Went Wrong!";
+                        $('#successToast').css('background-color','red');
+                        successToastElm.show();
+                        successToastDataElm.hide();
                 }
               });
               return false;
