@@ -107,21 +107,19 @@
               var that =$(this),
               url = 'http://isapi.mekashron.com/soapclient/soapclient.php?URL=http://isapi.icu-tech.com/icutech-test.dll/wsdl/IICUTech',
               method = 'POST',
-              data = {};
-              valPass = {};
-              valPass["func"]='Login';
               text = "";
               that.find('[name]').each(function(index,value){
                     var that = $(this),
                     name = that.attr('name'),
                     value = that.val();
-                    data[name] = value;
                     if(text=="")
                     text += name + "=" + value;
                     else
                     text += '&' + name + "=" + value;
               });
               text += '&' + "IPs" + "=";
+              valPass = {};
+              valPass["func"]='Login';
               valPass["params"] = text;
 
               $.ajax({
