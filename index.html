@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+orders->dispatchure->(admin->role39)
+	<!DOCTYPE html>
 
 <html lang="en">
     <head>
@@ -12,7 +13,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-        <title>Login</title>
+        <title>Login2</title>
 
       </head>
     <body>
@@ -31,7 +32,7 @@
                   <a class="nav-link active" href="#">Login</a>
                 </li>
                 <li class="li nav-item">
-                  <a class="nav-link" href="#">About As</a>
+                  <a class="nav-link" href="#">Contact Us</a>
                 </li>
               </ul>
             </div>
@@ -103,6 +104,25 @@
           var successToastDataElement = document.getElementById("successToastData");
           var successToastDataElm = new bootstrap.Toast(successToastDataElement,{animation: false});
 
+                // Example POST method implementation:
+                async function postData(url, data) {
+                  
+                  // Default options are marked with *
+                  const response = await fetch(url, {
+                    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    // mode: '*cors', // no-cors, *cors, same-origin
+                    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                    // credentials: 'same-origin', // include, *same-origin, omit
+                    headers: {
+                      // 'Content-Type': 'application/json'
+                      // 'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    redirect: 'follow', // manual, *follow, error
+                    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                    body: JSON.stringify(data) // body data type must match "Content-Type" header
+                  });
+                  return response.json(); // parses JSON response into native JavaScript objects
+                }
         $('form.ajax').on('submit', function(e) {
               var that =$(this),
               url = 'http://isapi.mekashron.com/soapclient/soapclient.php?URL=http://isapi.icu-tech.com/icutech-test.dll/wsdl/IICUTech',
@@ -122,64 +142,16 @@
               valPass["func"]='Login';
               valPass["params"] = text;
 
-              $.ajax({
-                url:url,
-                type:method,
-                data:valPass,
-                // headers: {
-                    // 'Access-Control-Allow-Origin':'*'
-                // },
-                crossDomain: true,
-                success:function(response){
-                    const returnValue = JSON.parse(response);
-                    if(returnValue && returnValue.ret != null){
-                      var result = JSON.parse(returnValue.ret);
-                      if(result.EntityId){
+              
+              
 
-                        var loginMessage = document.getElementById("successToastBody");
-                        loginMessage.innerHTML = "Successfully Loged In";
-                        $('#successToast').css('background-color','green');
-                        successToastElm.show();
+                postData(url,valPass)
+                  .then((data) => {
+                    console.log(data); // JSON data parsed by `data.json()` call
+                  });
 
-                        var userInfo = document.getElementById("successToastDataBody");
-                        userInfo.innerHTML = "Name: " + result.FirstName + " " + result.LastName + "<br />" 
-                                             + "Company: " + result.CompanyID + "<br />"
-                                             + "Phone Number: " + result.Mobile + "<br />";
-                                             + "Email: " + result.Email + "<br />";
-                                             + "Country Id: " + result.CountryID + "<br />";
-                        successToastDataElm.show();
-                      }
-                      else if(result.ResultCode){
-                        var resultMessage = document.getElementById("successToastBody");
-                        resultMessage.innerHTML = result.ResultMessage;
-                        $('#successToast').css('background-color','red');
-                        successToastElm.show();
-                        successToastDataElm.hide();
-                      }
-                      else {
-                        var errorMessage = document.getElementById("successToastBody");
-                        errorMessage.innerHTML = "Something Went Wrong!";
-                        $('#successToast').css('background-color','red');
-                        successToastElm.show();
-                        successToastDataElm.hide();
-                      }
-                    }
-                    else {
-                        var errorMessage = document.getElementById("successToastBody");
-                        errorMessage.innerHTML = "Something Went Wrong!";
-                        $('#successToast').css('background-color','red');
-                        successToastElm.show();
-                        successToastDataElm.hide();
-                    }
-                },
-                error: function(response){
-                        var errorMessage = document.getElementById("successToastBody");
-                        errorMessage.innerHTML = "Something Went Wrong!";
-                        $('#successToast').css('background-color','red');
-                        successToastElm.show();
-                        successToastDataElm.hide();
-                }
-              });
+
+
               return false;
           });
     </script>   
