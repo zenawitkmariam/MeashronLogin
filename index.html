@@ -126,9 +126,9 @@
                 url:url,
                 type:method,
                 data:valPass,
-                // headers: {
-                    // 'Access-Control-Allow-Origin':'*'
-                // },
+                cors:url,
+                // dataType:"application/json",
+                // headers: { 'Content-Type': 'application/json'},
                 crossDomain: true,
                 success:function(response){
                     const returnValue = JSON.parse(response);
