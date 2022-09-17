@@ -183,12 +183,7 @@
                     }
                 },
                 error: function(response){
-                  successToastElm.show();
-                        var userInfo = document.getElementById("successToastDataBody");
-                        userInfo.innerHTML = "Name: " + "result.FirstName" + " " + "result.LastName" + "<br />" 
-                                             + "Company: " + "result.CompanyID "+ "<br />"
-                                             + "Phone Number: " + "result.Mobile "+ "<br />";
-                        successToastDataElm.show();
+                    errorToastElm.show();
                 }
               });
               return false;
