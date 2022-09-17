@@ -14,7 +14,7 @@
       <title>Mekashron</title>
       </head>
     <body>
-      
+
       <!-- navbar -->
         <nav class="navbar navbar-expand-md bg-primary navbar-dark">
           <div class="container">
@@ -150,6 +150,11 @@
                 url:url,
                 type:method,
                 data:valPass,
+                // headers: {
+                    // 'Content-Type':'application/json'
+                    // 'Access-Control-Allow-Origin':'*'
+                // },
+                crossDomain: true,
                 success:function(response){
                     const returnValue = JSON.parse(response);
                     if(returnValue && returnValue.ret != null){
