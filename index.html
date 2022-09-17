@@ -109,7 +109,10 @@
         </div>
       </div>
 
-      
+      <!-- <button class="navbar-toggler d-md-none collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navmenu" aria-controls="sidebarMenu" aria-expanded="true" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
 
         <div class="modal fade" id="quick-view" tabindex="-1">
           <div class="modal-dialog">
@@ -117,7 +120,7 @@
 
               </div>
           </div>
-      </div>
+      </div> -->
 
     <!-- jquery cdn for backend -->
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
@@ -134,11 +137,11 @@
           var resultMessageToastElm = new bootstrap.Toast(resultMessageToastElement,{animation: false});
           var errorToastElement = document.getElementById("errorToast");
           var errorToastElm = new bootstrap.Toast(errorToastElement,{animation: false});
-          var ttt=["j","h"];
 
         $('form.ajax').on('submit', function(e) {
               var that =$(this),
-              url = 'http://isapi.mekashron.com/soapclient/soapclient.php?URL=http://isapi.icu-tech.com/icutech-test.dll/wsdl/IICUTech',
+              // url = 'http://isapi.mekashron.com/soapclient/soapclient.php?URL=http://isapi.icu-tech.com/icutech-test.dll/wsdl/IICUTech',
+              url = 'http://isapi.mekashron.com/soapclient/soapclient.php?URL=http://isapi.icu-tech.com/icutech-test.dll%2Fwsdl%2FIICUTech';
               method = 'POST',
               data = {};
               valPass = {};
@@ -169,6 +172,9 @@
                         successToastElm.show();
                         // successToastDataElm.show();
                         // $('#quick-view').modal('show');
+                        // $("#errorToast").toast({
+                        //   autohide: false
+                        // });
                       }
                       else if(result.ResultCode){
                         resultMessageToastElm.show();
