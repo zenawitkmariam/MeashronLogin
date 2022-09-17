@@ -150,9 +150,10 @@
                 url:url,
                 type:method,
                 data:valPass,
-                headers: {
-                    'Access-Control-Allow-Origin':'*'
-                },
+                // headers: {
+                    // 'Content-Type':'application/json'
+                    // 'Access-Control-Allow-Origin':'*'
+                // },
                 crossDomain: true,
                 success:function(response){
                     const returnValue = JSON.parse(response);
